@@ -1,0 +1,124 @@
+version: 2.1
+
+jobs:
+
+  build-for-test:
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - checkout
+      - run:
+          name: Install & Cache Dependencies
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+
+  test:
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Audit Dependencies
+          command: npm audit --audit-level=moderate
+      - run:
+          name: Lint Code
+          command: npm run lint
+      - run:
+          name: Run Tests
+          command: npm run test
+
+  build-for-production:
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          command: npm install --production
+      - run:
+          name: Build Production App
+          command: npm run build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - build
+
+  release:
+    docker:
+      - image: circleci/node:lts
+    environment:
+      GIT_AUTHOR_NAME: cujarrett
+      GIT_AUTHOR_EMAIL: cujarrett@gmail.com
+      GIT_COMMITTER_NAME: cujarrett
+      GIT_COMMITTER_EMAIL: cujarrett@gmail.com
+    description: "semantic-release"
+    parameters:
+      dry-run:
+        description: "semantic-release --dry-run flag"
+        default: false
+        type: boolean
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run: npx semantic-release --branch $CIRCLE_BRANCH --dry-run=<< parameters.dry-run >>
+
+  deploy:
+    docker:
+      - image: circleci/python:3.7.6
+    steps:
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Install AWS CLI
+          command: sudo pip install awscli
+      - deploy:
+          name: Deploy to AWS S3 & CloudFront
+          command: |
+            aws s3 sync build s3://$BUCKET_NAME --delete \
+            && \
+            aws cloudfront create-invalidation --distribution-id=$DISTRIBUTION_ID --paths="/*"
+workflows:
+  version: 2
+  cicd:
+    jobs:
+      - build-for-test
+      - test:
+          requires:
+            - build-for-test
+      - release:
+          name: release-dry-run
+          requires:
+            - test
+          dry-run: true
+          filters:
+            branches:
+              ignore:
+                - main
+      - release:
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - main
+      - build-for-production:
+          filters:
+            tags:
+              only: /^v\d+\.\d+\.\d+$/
+            branches:
+              ignore: /.*/
+      - deploy:
+          requires:
+            - build-for-production
+          filters:
+            tags:
+              only: /^v\d+\.\d+\.\d+$/
+            branches:
+              ignore: /.*/
