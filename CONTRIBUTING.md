@@ -1,11 +1,11 @@
 <p align="center" class="toc">
-   <strong><a href="#how-do-i-get-started">How Do I Get Started?</a></strong>
-   |
+  <strong><a href="#how-do-i-get-started">How Do I Get Started?</a></strong>
+  |
   <strong><a href="#setup">Setup</a></strong>
-   |
-   <strong><a href="#running-lintingtests">Running Linting/Tests</a></strong>
-   |
-   <strong><a href="#build-for-production">Build for Production</a></strong>
+  |
+  <strong><a href="#running-lintingtests">Running Linting/Tests</a></strong>
+  |
+  <strong><a href="#build-for-production">Build for Production</a></strong>
 </p>
 
 ---
