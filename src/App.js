@@ -1,11 +1,11 @@
-import React, { Component } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { saveAs } from "file-saver"
 import Animated from "react-animated-transitions"
 import IconButton from "@material-ui/core/IconButton"
 import { GetApp, Shuffle } from "@material-ui/icons"
 import PropTypes from "prop-types"
 
-import Art from "./lib"
+import Art from "./lib/"
 
 import maps from "./maps"
 import palettes from "./palettes"
@@ -17,8 +17,9 @@ const getRandom = () => ({
   palette: palettes[Math.floor(Math.random() * palettes.length)]
 })
 
-class App extends Component {
-  state = {
+const App = () => {
+  const art = useRef()
+  const [state, setState] = useState({
     custom: false,
     full: true,
     map: getRandom().map,
@@ -26,87 +27,96 @@ class App extends Component {
     mounted: false,
     palette: ["#2E86AB", "#A23B72", "#F18F01", "#C73E1D", "#3B1F2B"],
     stopped: false
+  })
+
+  useEffect(() => {
+    setState({ ...state, mounted: true })
+
+    drawArt()
+  }, [])
+
+  const randomize = () => {
+    setState({
+      ...state,
+      map: maps[Math.floor(Math.random() * maps.length)].default,
+      palette: palettes[Math.floor(Math.random() * palettes.length)]
+    })
+    drawArt()
   }
+  /* eslint-disable no-unused-vars */
+  const toggleShowUi = () => setState({ ...state, showUi: !state.showUi })
 
-  randomize = () => this.setState(getRandom(), () => this.drawArt())
-
-  toggleShowUi = () => this.setState({ showUi: !this.state.showUi })
-
-  drawArt = () => {
-    if (this.art.metadata().palette) {
-      document.body.style.background = this.art.metadata().palette[0]
+  const drawArt = () => {
+    if (art.current.metadata().palette) {
+      document.body.style.background = art.current.metadata().palette[0]
     }
 
-    this.art.draw()
-    this.setState({ palette: this.art.metadata().palette, stopped: false })
+    art.current.draw()
+    setState({
+      ...state,
+      palette: art.current.metadata().palette,
+      stopped: false
+    })
   }
 
-  stopDrawing = () => {
-    this.art.stop()
-    this.setState({ stopped: true })
+  const stopDrawing = () => {
+    art.current.stop()
+    setState({ ...state, stopped: true })
   }
 
-  downloadArt = () => {
-    this.stopDrawing()
+  const downloadArt = () => {
+    stopDrawing()
 
-    this.art
+    art.current
       .ref()
-      .toBlob((blob) => saveAs(blob, `${this.art.metadata().seed}.png`))
+      .toBlob((blob) => saveAs(blob, `${art.current.metadata().seed}.png`))
   }
 
-  createRef = (ref) => {
-    this.art = ref
-
-    if (!this.state.mounted)
-      this.setState({ mounted: true }, () => this.drawArt())
+  const renderArt = () => {
+    return <Art map={state.map} palette={state.palette} ref={art} />
+    // return <div> I love Render</div>
   }
-
-  renderArt = () => {
-    return (
-      <Art
-        map={this.state.map}
-        palette={this.state.palette}
-        ref={this.createRef}
-      />
-    )
-  }
-
-  render() {
-    return (
-      <Animated>
-        <div>
-          <div className="art" data-testid="art">
-            {this.renderArt()}
-          </div>
-          <div className="menu">
-            <div className="actions">
-              <IconButton
-                style={{ color: this.state.palette[4] }}
-                onClick={this.randomize} color="inherit"
-                aria-label="Shuffle"
-                component="span">
-                <Shuffle />
-              </IconButton>
-              <IconButton
-                style={{ color: this.state.palette[4] }}
-                onClick={this.downloadArt}
-                color="inherit"
-                aria-label="Download Image"
-                component="span">
-                <GetApp />
-              </IconButton>
-            </div>
-          </div>
-          <div className="footer">
-            <h4 style={{ color: this.state.palette[4] }}>
-              Made by <a style={{ color: this.state.palette[4] }}
-              href="https://cujarrett.dev">@cujarrett</a> with <i className="fa fa-heart"/> and JavaScript
-            </h4>
+  return (
+    <Animated>
+      <div>
+        <div className="art" data-testid="art">
+          {renderArt()}
+          {/* <RenderArt /> */}
+        </div>
+        <div className="menu">
+          <div className="actions">
+            <IconButton
+              style={{ color: state.palette[4] }}
+              onClick={randomize}
+              color="inherit"
+              aria-label="Shuffle"
+              component="span"
+            >
+              <Shuffle />
+            </IconButton>
+            <IconButton
+              style={{ color: state.palette[4] }}
+              onClick={downloadArt}
+              color="inherit"
+              aria-label="Download Image"
+              component="span"
+            >
+              <GetApp />
+            </IconButton>
           </div>
         </div>
-      </Animated>
-    )
-  }
+        <div className="footer">
+          <h4 style={{ color: state.palette[4] }}>
+            Made by{" "}
+            <a style={{ color: state.palette[4] }} href="https://cujarrett.dev">
+              @cujarrett
+            </a>{" "}
+            with <i className="fa fa-heart" /> and JavaScript
+          </h4>
+        </div>
+      </div>
+    </Animated>
+  )
 }
 
 App.propTypes = {

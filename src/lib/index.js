@@ -13,13 +13,13 @@ export default class Art extends Component {
     seed: PropTypes.string,
     height: PropTypes.number,
     width: PropTypes.number
-  }
+  };
 
   static defaultProps = {
     seed: undefined,
     height: window.innerHeight,
     width: window.innerWidth
-  }
+  };
 
   refresh = (config) => {
     if (this.loop) this.loop.stop()
@@ -59,7 +59,7 @@ export default class Art extends Component {
     }
 
     background.src = config.backgroundSrc
-  }
+  };
 
   // resize and reposition canvas to form a letterbox view
   letterbox = (element, parent) => {
@@ -76,7 +76,7 @@ export default class Art extends Component {
     el.style.top = `${y}px`
     el.style.width = `${width}px`
     el.style.height = `${height}px`
-  }
+  };
 
   draw = () => {
     const config = createConfig({
@@ -92,20 +92,21 @@ export default class Art extends Component {
     this.seed = config.seedName
     this.map = config.backgroundSrc
     this.palette = config.palette
-  }
+  };
 
-  stop = () => this.loop.stop()
+  stop = () => this.loop.stop();
 
-  ref = () => this.canvas
+  ref = () => this.canvas;
 
-  data = () => this.canvas.toDataURL("image/png")
+  data = () => this.canvas.toDataURL("image/png");
 
   metadata = () => {
     const { seed, map, palette } = this
     return { seed, map, palette }
-  }
+  };
 
   render() {
     return <canvas ref={(ref) => (this.canvas = ref)} />
+    // return <div> Hellow this is Art</div>
   }
 }
