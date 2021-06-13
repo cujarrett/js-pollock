@@ -25,9 +25,22 @@ const App = () => {
     map: getRandom().map,
     more: false,
     mounted: false,
-    palette: ["#2E86AB", "#A23B72", "#F18F01", "#C73E1D", "#3B1F2B"],
+    palette: palettes[Math.floor(Math.random() * palettes.length)],
     stopped: false
   })
+
+  const drawArt = () => {
+    if (art.current.metadata().palette) {
+      document.body.style.background = art.current.metadata().palette[0]
+    }
+
+    art.current.draw()
+    setState({
+      ...state,
+      palette: art.current.metadata().palette,
+      stopped: false
+    })
+  }
 
   useEffect(() => {
     setState({ ...state, mounted: true })
@@ -45,19 +58,6 @@ const App = () => {
   }
   /* eslint-disable no-unused-vars */
   const toggleShowUi = () => setState({ ...state, showUi: !state.showUi })
-
-  const drawArt = () => {
-    if (art.current.metadata().palette) {
-      document.body.style.background = art.current.metadata().palette[0]
-    }
-
-    art.current.draw()
-    setState({
-      ...state,
-      palette: art.current.metadata().palette,
-      stopped: false
-    })
-  }
 
   const stopDrawing = () => {
     art.current.stop()

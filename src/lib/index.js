@@ -107,6 +107,5 @@ export default class Art extends Component {
 
   render() {
     return <canvas ref={(ref) => (this.canvas = ref)} />
-    // return <div> Hellow this is Art</div>
   }
 }
