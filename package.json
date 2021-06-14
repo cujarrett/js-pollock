@@ -35,6 +35,7 @@
     "file-saver": "~2.0.5",
     "font-awesome": "~4.7.0",
     "gl-vec2": "~1.3.0",
+    "invert-color": "~2.0.0",
     "lerp": "~1.0.3",
     "new-array": "~1.0.0",
     "prop-types": "~15.7.2",
