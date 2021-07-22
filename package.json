@@ -21,14 +21,15 @@
     "fix-lint": "eslint . --fix",
     "ci": "npm run lint",
     "build": "react-scripts build",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "prepare": "husky install"
   },
   "keywords": [
     "Jackson Pollock",
     "Computer Generated Art"
   ],
   "dependencies": {
-    "@material-ui/core": "~4.11.4",
+    "@material-ui/core": "~4.12.2",
     "@material-ui/icons": "~4.11.2",
     "clamp": "~1.0.1",
     "color-luminance": "~2.1.0",
@@ -57,12 +58,12 @@
     "@semantic-release/git": "~9.0.0",
     "@semantic-release/github": "~7.2.3",
     "@semantic-release/npm": "~7.1.3",
-    "@semantic-release/release-notes-generator": "~9.0.2",
+    "@semantic-release/release-notes-generator": "~9.0.3",
     "commitizen": "~4.2.4",
     "cz-conventional-changelog": "~3.3.0",
-    "eslint": "~7.28.0",
-    "husky": "~4.3.8",
-    "semantic-release": "~17.4.3"
+    "eslint": "~7.31.0",
+    "husky": "~7.0.1",
+    "semantic-release": "~17.4.4"
   },
   "browserslist": {
     "production": [
