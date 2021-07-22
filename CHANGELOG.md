@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.1](https://github.com/cujarrett/js-pollock/compare/v0.3.0...v0.3.1) (2021-07-22)
+
+
+### Bug Fixes
+
+* updates dependencies ([#7](https://github.com/cujarrett/js-pollock/issues/7)) ([67c9c3b](https://github.com/cujarrett/js-pollock/commit/67c9c3ba1f5dfa46cb0fc155f2609dde947e8f17))
+
 # [0.3.0](https://github.com/cujarrett/js-pollock/compare/v0.2.3...v0.3.0) (2021-06-14)
 
 
