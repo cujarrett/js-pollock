@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.2](https://github.com/cujarrett/js-pollock/compare/v0.3.1...v0.3.2) (2021-07-22)
+
+
+### Bug Fixes
+
+* adds react-transition-group explicitly ([e2cee0e](https://github.com/cujarrett/js-pollock/commit/e2cee0e89469bf6ad25ac0ad6e65a51187b7c4ca))
+
 ## [0.3.1](https://github.com/cujarrett/js-pollock/compare/v0.3.0...v0.3.1) (2021-07-22)
 
 
