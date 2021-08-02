@@ -29,7 +29,7 @@
     "Computer Generated Art"
   ],
   "dependencies": {
-    "@material-ui/core": "~4.12.2",
+    "@material-ui/core": "~4.12.3",
     "@material-ui/icons": "~4.11.2",
     "clamp": "~1.0.1",
     "color-luminance": "~2.1.0",
@@ -45,14 +45,14 @@
     "react-animated-transitions": "~0.0.6",
     "react-dom": "~17.0.2",
     "react-scripts": "~4.0.3",
-    "react-transition-group": "~2.9.0",
+    "react-transition-group": "~4.4.2",
     "seed-random": "~2.2.0",
     "simplex-noise": "~2.4.0",
     "smoothstep": "~1.0.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "~12.1.4",
-    "@commitlint/config-conventional": "~12.1.4",
+    "@commitlint/cli": "~13.1.0",
+    "@commitlint/config-conventional": "~13.1.0",
     "@semantic-release/changelog": "~5.0.1",
     "@semantic-release/commit-analyzer": "~8.0.1",
     "@semantic-release/exec": "~5.0.0",
@@ -62,7 +62,7 @@
     "@semantic-release/release-notes-generator": "~9.0.3",
     "commitizen": "~4.2.4",
     "cz-conventional-changelog": "~3.3.0",
-    "eslint": "~7.31.0",
+    "eslint": "~7.32.0",
     "husky": "~7.0.1",
     "semantic-release": "~17.4.4"
   },
