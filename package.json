@@ -47,7 +47,7 @@
     "react-scripts": "~4.0.3",
     "react-transition-group": "~4.4.2",
     "seed-random": "~2.2.0",
-    "simplex-noise": "~2.4.0",
+    "simplex-noise": "~3.0.0",
     "smoothstep": "~1.0.1"
   },
   "devDependencies": {
