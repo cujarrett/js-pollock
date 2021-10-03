@@ -25,7 +25,7 @@ jobs:
   deploy:
     name: deploy
     environment: main
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
         with:
