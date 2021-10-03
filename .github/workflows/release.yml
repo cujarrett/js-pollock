@@ -24,6 +24,7 @@ jobs:
         run: npx semantic-release
   deploy:
     name: deploy
+    needs: release
     environment: main
     runs-on: ubuntu-18.04
     steps:
