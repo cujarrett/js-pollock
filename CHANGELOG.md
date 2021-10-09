@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# [0.6.0](https://github.com/cujarrett/js-pollock/compare/v0.5.1...v0.6.0) (2021-10-09)
+
+
+### Features
+
+* adds default terraform tags ([#30](https://github.com/cujarrett/js-pollock/issues/30)) ([c77268b](https://github.com/cujarrett/js-pollock/commit/c77268b44594493b948a4da0019f04118e04e53c))
+
 ## [0.5.1](https://github.com/cujarrett/js-pollock/compare/v0.5.0...v0.5.1) (2021-10-03)
 
 
