@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# [0.7.0](https://github.com/cujarrett/js-pollock/compare/v0.6.0...v0.7.0) (2021-10-10)
+
+
+### Features
+
+* adds hide UI feature ([#31](https://github.com/cujarrett/js-pollock/issues/31)) ([d1df10b](https://github.com/cujarrett/js-pollock/commit/d1df10b3afda6dd647bbd3b71b5ac8ac12ef3eda))
+
 # [0.6.0](https://github.com/cujarrett/js-pollock/compare/v0.5.1...v0.6.0) (2021-10-09)
 
 
