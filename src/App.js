@@ -3,7 +3,7 @@ import { saveAs } from "file-saver"
 import Animated from "react-animated-transitions"
 import IconButton from "@material-ui/core/IconButton"
 import invert from "invert-color"
-import { GetApp, Shuffle } from "@material-ui/icons"
+import { GetApp, Shuffle, VisibilityOff } from "@material-ui/icons"
 import PropTypes from "prop-types"
 
 import Art from "./lib/"
@@ -27,14 +27,26 @@ const App = () => {
   const [map] = useState(getRandom().map)
   const [palette, setPalette] = useState(palettes[Math.floor(Math.random() * palettes.length)])
   const [uiColor, setUiColor] = useState(invert(palette[0]))
-  const [, setStopped] = useState(false)
+  const [showUi, setShowUi] = useState(true)
 
   useEffect(() => {
     drawArt()
   }, [])
 
+  useEffect(() => {
+    const handleClick = () => {
+      if (showUi === false) {
+        toggleShowUi()
+      }
+    }
+
+    document.addEventListener("mousedown", handleClick)
+    return () => {
+      document.removeEventListener("mousedown", handleClick)
+    }
+  }, [showUi])
+
   const drawArt = () => {
-    setStopped(true)
     const { palette } = getRandom()
     setPalette(palette)
     if (art.current.metadata().palette) {
@@ -42,12 +54,10 @@ const App = () => {
       document.body.style.background = art.current.metadata().palette[0]
     }
     art.current.draw()
-    setStopped(false)
   }
 
   const stopDrawing = () => {
     art.current.stop()
-    setStopped(true)
   }
 
   const downloadArt = () => {
@@ -61,43 +71,60 @@ const App = () => {
     return <Art map={map} palette={palette} ref={art} />
   }
 
+  const toggleShowUi = () => {
+    setShowUi(!showUi)
+  }
+
   return (
     <Animated>
       <div>
         <div className="art" data-testid="art">
           {renderArt()}
         </div>
-        <div className="menu">
-          <div className="actions">
-            <IconButton
-              style={{ color: uiColor }}
-              onClick={drawArt}
-              color="inherit"
-              aria-label="Shuffle"
-              component="span"
-            >
-              <Shuffle />
-            </IconButton>
-            <IconButton
-              style={{ color: uiColor }}
-              onClick={downloadArt}
-              color="inherit"
-              aria-label="Download Image"
-              component="span"
-            >
-              <GetApp />
-            </IconButton>
+        { showUi &&
+          <div className="menu">
+            <div className="actions">
+              <IconButton
+                style={{ color: uiColor }}
+                onClick={drawArt}
+                color="inherit"
+                aria-label="Shuffle"
+                component="span"
+              >
+                <Shuffle />
+              </IconButton>
+              <IconButton
+                style={{ color: uiColor }}
+                onClick={downloadArt}
+                color="inherit"
+                aria-label="Download Image"
+                component="span"
+              >
+                <GetApp />
+              </IconButton>
+              <IconButton
+                style={{ color: uiColor }}
+                onClick={toggleShowUi}
+                color="inherit"
+                aria-label="Hide UI"
+                component="span"
+              >
+                <VisibilityOff />
+              </IconButton>
+            </div>
           </div>
-        </div>
-        <div className="footer">
-          <h4 style={{ color: uiColor }}>
-            Made by{" "}
-            <a style={{ color: uiColor }} href="https://cujarrett.dev">
-              @cujarrett
-            </a>{" "}
-            with <i className="fa fa-heart" /> and JavaScript
-          </h4>
-        </div>
+        }
+        { showUi &&
+          <div className="footer">
+            <h4 style={{ color: uiColor }}>
+              Made by{" "}
+              <a style={{ color: uiColor }} href="https://cujarrett.dev">
+                @cujarrett
+              </a>{" "}
+              with <i className="fa fa-heart" /> and JavaScript
+            </h4>
+          </div>
+        }
       </div>
     </Animated>
   )

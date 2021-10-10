@@ -16,12 +16,12 @@ body {
 
 .menu {
   position: absolute;
-  width: 106px;
+  width: 154px;
   height: 60px;
   bottom: 5%;
   right: 25%;
   left: 50%;
-  margin-left: -53px;
+  margin-left: -77px;
 }
 
 .footer h4 {
