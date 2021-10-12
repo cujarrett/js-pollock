@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.1](https://github.com/cujarrett/js-pollock/compare/v0.7.0...v0.7.1) (2021-10-12)
+
+
+### Bug Fixes
+
+* **deps-dev:** bump @commitlint/cli from 13.2.0 to 13.2.1 ([#32](https://github.com/cujarrett/js-pollock/issues/32)) ([c4e0683](https://github.com/cujarrett/js-pollock/commit/c4e0683932083fcf3c6442c2ea82d4b7058d5925))
+
 # [0.7.0](https://github.com/cujarrett/js-pollock/compare/v0.6.0...v0.7.0) (2021-10-10)
 
 
