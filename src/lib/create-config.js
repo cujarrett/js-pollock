@@ -21,9 +21,9 @@ export default ({
     count: Math.floor(random(50, 2000)),
     endlessBrowser: true, // whether to endlessly step in browser
     globalAlpha: 0.5,
-    interval: random(0.001, 0.01),
+    interval: 0,
     lineStyle: random(1) > 0.5 ? "round" : "square",
-    maxRadius: random(5, 40),
+    maxRadius: random(30, 40),
     noiseScalar: [random(0.000001, 0.000001), random(0.0002, 0.004)],
     pointilism: random(0, 0.1),
     random: randomFunc,

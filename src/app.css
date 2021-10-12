@@ -16,12 +16,12 @@ body {
 
 .menu {
   position: absolute;
-  width: 154px;
+  width: 226px;
   height: 60px;
   bottom: 5%;
   right: 25%;
   left: 50%;
-  margin-left: -77px;
+  margin-left: -113px;
 }
 
 .footer h4 {
@@ -58,4 +58,8 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.MuiButtonBase-root {
+  margin: 12px !important;
 }
