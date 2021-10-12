@@ -23,9 +23,20 @@ const getRandom = () => {
 }
 
 const App = () => {
+  const getInitialPallete = () => {
+    const isUrlColors = window.location.pathname.substring(1) !== ""
+    if (isUrlColors) {
+      const userDefinedColors = window.location.pathname.substring(1).split("-")
+      const userDefinedColorsWithHex = userDefinedColors.map((color) => `#${color}`)
+      return userDefinedColorsWithHex
+    } else {
+      return palettes[Math.floor(Math.random() * palettes.length)]
+    }
+  }
+
   const art = useRef()
   const [map] = useState(getRandom().map)
-  const [palette, setPalette] = useState(palettes[Math.floor(Math.random() * palettes.length)])
+  const [palette, setPalette] = useState(getInitialPallete)
   const [uiColor, setUiColor] = useState(invert(palette[0]))
   const [showUi, setShowUi] = useState(true)
 
@@ -46,9 +57,16 @@ const App = () => {
     }
   }, [showUi])
 
-  const drawArt = () => {
+  const getRandomPalette = () => {
     const { palette } = getRandom()
     setPalette(palette)
+    drawArt()
+  }
+
+  const drawArt = () => {
+    const paletteWithoutHash = palette.map((color) => color.toUpperCase().replace("#", ""))
+    const stringOfPalettes = paletteWithoutHash.join("-")
+    window.history.pushState("", "jspollock", `/${stringOfPalettes}`)
     if (art.current.metadata().palette) {
       setUiColor(invert(art.current.metadata().palette[0]))
       document.body.style.background = art.current.metadata().palette[0]
@@ -86,7 +104,7 @@ const App = () => {
             <div className="actions">
               <IconButton
                 style={{ color: uiColor }}
-                onClick={drawArt}
+                onClick={getRandomPalette}
                 color="inherit"
                 aria-label="Shuffle"
                 component="span"
