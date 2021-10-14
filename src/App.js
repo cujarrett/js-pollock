@@ -42,7 +42,7 @@ const App = () => {
 
   useEffect(() => {
     drawArt()
-  }, [])
+  }, [palette])
 
   useEffect(() => {
     const handleClick = () => {
@@ -60,17 +60,13 @@ const App = () => {
   const getRandomPalette = () => {
     const { palette } = getRandom()
     setPalette(palette)
-    drawArt()
+    setUiColor(invert(palette[0]))
   }
 
   const drawArt = () => {
     const paletteWithoutHash = palette.map((color) => color.toUpperCase().replace("#", ""))
     const stringOfPalettes = paletteWithoutHash.join("-")
     window.history.pushState("", "jspollock", `/${stringOfPalettes}`)
-    if (art.current.metadata().palette) {
-      setUiColor(invert(art.current.metadata().palette[0]))
-      document.body.style.background = art.current.metadata().palette[0]
-    }
     art.current.draw()
   }
 
@@ -85,10 +81,6 @@ const App = () => {
       .toBlob((blob) => saveAs(blob, `${art.current.metadata().seed}.png`))
   }
 
-  const renderArt = () => {
-    return <Art map={map} palette={palette} ref={art} />
-  }
-
   const toggleShowUi = () => {
     setShowUi(!showUi)
   }
@@ -97,13 +89,13 @@ const App = () => {
     <Animated>
       <div>
         <div className="art" data-testid="art">
-          {renderArt()}
+          <Art map={map} palette={palette} ref={art} />
         </div>
         { showUi &&
           <div className="menu">
             <div className="actions">
               <IconButton
-                style={{ color: uiColor }}
+                style={{ color: uiColor, backgroundColor: invert(uiColor) }}
                 onClick={getRandomPalette}
                 color="inherit"
                 aria-label="Shuffle"
@@ -112,7 +104,7 @@ const App = () => {
                 <Shuffle />
               </IconButton>
               <IconButton
-                style={{ color: uiColor }}
+                style={{ color: uiColor, backgroundColor: invert(uiColor) }}
                 onClick={downloadArt}
                 color="inherit"
                 aria-label="Download Image"
@@ -121,7 +113,7 @@ const App = () => {
                 <GetApp />
               </IconButton>
               <IconButton
-                style={{ color: uiColor }}
+                style={{ color: uiColor, backgroundColor: invert(uiColor) }}
                 onClick={toggleShowUi}
                 color="inherit"
                 aria-label="Hide UI"
@@ -134,9 +126,9 @@ const App = () => {
         }
         { showUi &&
           <div className="footer">
-            <h4 style={{ color: uiColor }}>
+            <h4 style={{ color: uiColor, backgroundColor: invert(uiColor) }}>
               Made by{" "}
-              <a style={{ color: uiColor }} href="https://cujarrett.dev">
+              <a style={{ color: uiColor, backgroundColor: invert(uiColor) }} href="https://cujarrett.dev">
                 @cujarrett
               </a>{" "}
               with <i className="fa fa-heart" /> and JavaScript

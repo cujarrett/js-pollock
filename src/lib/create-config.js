@@ -1,6 +1,4 @@
 import seedRandom from "seed-random"
-
-import createPalette from "./create-palette.js"
 import createRange from "./create-range.js"
 
 export default ({
@@ -39,7 +37,7 @@ export default ({
 
     // browser options
     height: height / factor,
-    palette: createPalette(palettes, random),
+    palette: palettes[0],
     pixelRatio: 1,
     width: width / factor
   }
