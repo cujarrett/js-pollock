@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.8](https://github.com/cujarrett/js-pollock/compare/v0.8.7...v0.8.8) (2021-10-22)
+
+
+### Bug Fixes
+
+* footer width ([#43](https://github.com/cujarrett/js-pollock/issues/43)) ([e8ea9ac](https://github.com/cujarrett/js-pollock/commit/e8ea9ac62b2c93b4765062c3d10505df5c44ad8a))
+
 ## [0.8.7](https://github.com/cujarrett/js-pollock/compare/v0.8.6...v0.8.7) (2021-10-22)
 
 
