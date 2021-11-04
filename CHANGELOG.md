@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.15](https://github.com/cujarrett/js-pollock/compare/v0.8.14...v0.8.15) (2021-11-04)
+
+
+### Bug Fixes
+
+* **deps-dev:** bump @semantic-release/npm from 8.0.2 to 8.0.3 ([#50](https://github.com/cujarrett/js-pollock/issues/50)) ([26fd9d2](https://github.com/cujarrett/js-pollock/commit/26fd9d29089a7a2e24279759059ade6d8e456cf2))
+
 ## [0.8.14](https://github.com/cujarrett/js-pollock/compare/v0.8.13...v0.8.14) (2021-11-03)
 
 
