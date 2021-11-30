@@ -3,7 +3,6 @@ updates:
 - package-ecosystem: npm
   directory: "/"
   schedule:
-    interval: daily
-  commit-message:
-      prefix: "fix"
-      include: "scope"
+    interval: "daily"
+  reviewers:
+    - "cujarrett"
