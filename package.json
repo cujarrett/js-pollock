@@ -44,7 +44,7 @@
     "react": "~17.0.2",
     "react-animated-transitions": "~0.0.6",
     "react-dom": "~17.0.2",
-    "react-scripts": "~4.0.3",
+    "react-scripts": "~5.0.0",
     "react-transition-group": "~4.4.2",
     "seed-random": "~2.2.0",
     "simplex-noise": "~3.0.0",
