@@ -1,4 +1,14 @@
 # Changelog
+All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [0.9.4](https://github.com/cujarrett/js-pollock/compare/v0.9.3...v0.9.4) (2021-12-26)
+
+
+### Bug Fixes
+
+* updates to react-scripts 5 ([#60](https://github.com/cujarrett/js-pollock/issues/60)) ([568936c](https://github.com/cujarrett/js-pollock/commit/568936ce227fd613ab65b2f183d2fed0ae646302))
+
+# Changelog
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
