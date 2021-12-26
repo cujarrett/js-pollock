@@ -8,19 +8,10 @@ import PropTypes from "prop-types"
 
 import Art from "./lib/"
 
-import maps from "./maps"
+import defaultMap from "./maps/1.jpg"
 import palettes from "./palettes"
 
 import "./app.css"
-
-const getRandom = () => {
-  const randomPalette = Math.floor(Math.random() * palettes.length)
-  const result = {
-    map: maps[Math.floor(Math.random() * maps.length)].default,
-    palette: palettes[randomPalette]
-  }
-  return result
-}
 
 const App = () => {
   const getInitialPallete = () => {
@@ -35,7 +26,7 @@ const App = () => {
   }
 
   const art = useRef()
-  const [map] = useState(getRandom().map)
+  const [map] = useState(defaultMap)
   const [palette, setPalette] = useState(getInitialPallete)
   const [uiColor, setUiColor] = useState(invert(palette[0]))
   const [showUi, setShowUi] = useState(true)
@@ -58,7 +49,8 @@ const App = () => {
   }, [showUi])
 
   const getRandomPalette = () => {
-    const { palette } = getRandom()
+    const randomPaletteIndex = Math.floor(Math.random() * palettes.length)
+    const palette = palettes[randomPaletteIndex]
     setPalette(palette)
     setUiColor(invert(palette[0]))
   }

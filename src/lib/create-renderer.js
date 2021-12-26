@@ -36,24 +36,23 @@ export default (opt = {}) => {
   let time = 0
 
   const resetParticle = (particle = {}) => {
-    const p = particle
     const scale = Math.min(width, height) / 2
 
-    p.position = createSphere([], random(0, scale * startArea), randFunc)
-    p.position[0] += width / 2
-    p.position[1] += height / 2
-    p.radius = random(0.01, maxRadius)
-    p.duration = random(1, 500)
-    p.time = random(0, p.duration)
-    p.velocity = [random(-1, 1), random(-1, 1)]
-    p.speed = random(0.5, 2) * dpr
+    particle.position = createSphere([], random(0, scale * startArea), randFunc)
+    particle.position[0] += width / 2
+    particle.position[1] += height / 2
+    particle.radius = random(0.01, maxRadius)
+    particle.duration = random(1, 500)
+    particle.time = random(0, particle.duration)
+    particle.velocity = [random(-1, 1), random(-1, 1)]
+    particle.speed = random(0.5, 2) * dpr
 
     // we actually include the background color here
     // this means some strokes may seem to "erase" the other
     // colors, which can add a nice effect
-    p.color = palette[Math.floor(random(palette.length))]
+    particle.color = palette[Math.floor(random(palette.length))]
 
-    return p
+    return particle
   }
 
   const particles = newArray(count).map(() => resetParticle())
@@ -67,10 +66,10 @@ export default (opt = {}) => {
     time += dt
 
     particles.forEach((particle) => {
-      const p = particle
-
-      const x = p.position[0]
-      const y = p.position[1]
+      // eslint-disable-next-line id-length
+      const x = particle.position[0]
+      // eslint-disable-next-line id-length
+      const y = particle.position[1]
 
       const fx = clamp(Math.round(x), 0, canvas.width - 1)
       const fy = clamp(Math.round(y), 0, canvas.height - 1)
@@ -79,37 +78,37 @@ export default (opt = {}) => {
       const heightValue = heightMap[heightIndex * 4] / 255
 
       const pS = lerp(noiseScalar[0], noiseScalar[1], heightValue)
-      const n = simplex.noise3D(fx * pS, fy * pS, p.duration + time)
+      const noise = simplex.noise3D(fx * pS, fy * pS, particle.duration + time)
 
-      const angle = n * Math.PI * 2
-      const speed = p.speed + lerp(0.0, 2, 1 - heightValue)
+      const angle = noise * Math.PI * 2
+      const speed = particle.speed + lerp(0.0, 2, 1 - heightValue)
 
-      vec2.add(p.velocity, p.velocity, [Math.cos(angle), Math.sin(angle)])
-      vec2.normalize(p.velocity, p.velocity)
+      vec2.add(particle.velocity, particle.velocity, [Math.cos(angle), Math.sin(angle)])
+      vec2.normalize(particle.velocity, particle.velocity)
 
-      const move = vec2.scale([], p.velocity, speed)
+      const move = vec2.scale([], particle.velocity, speed)
 
-      vec2.add(p.position, p.position, move)
+      vec2.add(particle.position, particle.position, move)
 
       const s2 = pointilism
 
-      let r = p.radius * simplex.noise3D(x * s2, y * s2, p.duration + time)
-      r *= lerp(0.01, 1.0, heightValue)
+      let random = particle.radius * simplex.noise3D(x * s2, y * s2, particle.duration + time)
+      random *= lerp(0.01, 1.0, heightValue)
 
       ctx.beginPath()
       ctx.lineTo(x, y)
-      ctx.lineTo(p.position[0], p.position[1])
-      ctx.lineWidth = r * (p.time / p.duration)
+      ctx.lineTo(particle.position[0], particle.position[1])
+      ctx.lineWidth = random * (particle.time / particle.duration)
       ctx.lineCap = opt.lineStyle || "square"
       ctx.lineJoin = opt.lineStyle || "square"
-      ctx.strokeStyle = p.color
+      ctx.strokeStyle = particle.color
 
       ctx.globalAlpha = globalAlpha
       ctx.stroke()
 
-      p.time += dt
+      particle.time += dt
 
-      if (p.time > p.duration) resetParticle(p)
+      if (particle.time > particle.duration) resetParticle(particle)
     })
   }
 

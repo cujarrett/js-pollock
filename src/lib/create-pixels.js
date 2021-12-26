@@ -1,5 +1,5 @@
 import smoothstep from "smoothstep"
-import luminance from "color-luminance"
+import colorLuminance from "color-luminance"
 
 import createImage from "./create-image.js"
 
@@ -17,23 +17,23 @@ export default (ctx, img, opt) => {
   const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
   const rgba = imageData.data
 
-  for (let i = 0; i < canvas.width * canvas.height; i += 1) {
-    const r = rgba[i * 4 + 0]
-    const g = rgba[i * 4 + 1]
-    const b = rgba[i * 4 + 2]
+  for (let index = 0; index < canvas.width * canvas.height; index += 1) {
+    const red = rgba[index * 4 + 0]
+    const green = rgba[index * 4 + 1]
+    const blue = rgba[index * 4 + 2]
 
     // grayscale
-    let L = luminance(r, g, b)
+    let luminance = colorLuminance(red, green, blue)
 
     // optional threshold
     if (threshold) {
-      L = Math.floor(smoothstep(threshold[0], threshold[1], L / 255) * 255)
+      luminance = Math.floor(smoothstep(threshold[0], threshold[1], luminance / 255) * 255)
     }
 
     // replace RGBA
-    rgba[i * 4 + 0] = L
-    rgba[i * 4 + 1] = L
-    rgba[i * 4 + 2] = L
+    rgba[index * 4 + 0] = luminance
+    rgba[index * 4 + 1] = luminance
+    rgba[index * 4 + 2] = luminance
   }
 
   return imageData
