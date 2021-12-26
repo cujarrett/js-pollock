@@ -71,6 +71,7 @@ export default class Art extends Component {
 
     const width = pwidth
     const height = Math.round(width / aspect)
+    // eslint-disable-next-line id-length
     const y = Math.floor(pheight - height) / 2
 
     el.style.top = `${y}px`

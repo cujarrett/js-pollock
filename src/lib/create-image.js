@@ -2,30 +2,32 @@
 // similar to css background-size: cover
 
 export default (ctx, image, parent, scale = 1) => {
-  const p = parent || ctx.canvas
+  const pixi = parent || ctx.canvas
 
   const tAspect = image.width / image.height
-  const pWidth = p.width
-  const pHeight = p.height
+  const pixiWidth = pixi.width
+  const pixiHeight = pixi.height
 
-  const pAspect = pWidth / pHeight
+  const pAspect = pixiWidth / pixiHeight
 
   let width
   let height
 
   if (tAspect > pAspect) {
-    height = pHeight
+    height = pixiHeight
     width = height * tAspect
   } else {
-    width = pWidth
+    width = pixiWidth
     height = width / tAspect
   }
 
   width *= scale
   height *= scale
 
-  const x = (pWidth - width) / 2
-  const y = (pHeight - height) / 2
+  // eslint-disable-next-line id-length
+  const x = (pixiWidth - width) / 2
+  // eslint-disable-next-line id-length
+  const y = (pixiHeight - height) / 2
 
   ctx.drawImage(image, x, y, width, height)
 }

@@ -44,13 +44,17 @@
     "react": "~17.0.2",
     "react-animated-transitions": "~0.0.6",
     "react-dom": "~17.0.2",
-    "react-scripts": "~4.0.3",
+    "react-scripts": "~5.0.0",
     "react-transition-group": "~4.4.2",
     "seed-random": "~2.2.0",
-    "simplex-noise": "~3.0.0",
-    "smoothstep": "~1.0.1"
+    "simplex-noise": "~2.4.0",
+    "smoothstep": "~1.0.1",
+    "web-vitals": "~2.1.2"
   },
   "devDependencies": {
+    "@babel/core": "~7.16.5",
+    "@babel/eslint-parser": "~7.16.5",
+    "@babel/preset-react": "~7.16.5",
     "@commitlint/cli": "~15.0.0",
     "@commitlint/config-conventional": "~15.0.0",
     "@semantic-release/changelog": "~6.0.1",
@@ -62,7 +66,18 @@
     "@semantic-release/release-notes-generator": "~10.0.3",
     "commitizen": "~4.2.4",
     "cz-conventional-changelog": "~3.3.0",
+    "eslint-plugin-react": "~7.28.0",
     "husky": "~7.0.4"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   },
   "browserslist": {
     "production": [
@@ -75,15 +90,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
   }
 }
