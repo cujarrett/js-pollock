@@ -39,7 +39,7 @@
     "invert-color": "~2.0.0",
     "lerp": "~1.0.3",
     "new-array": "~1.0.0",
-    "prop-types": "~15.8.0",
+    "prop-types": "~15.8.1",
     "raf-loop": "~1.1.3",
     "react": "~17.0.2",
     "react-animated-transitions": "~0.0.6",
