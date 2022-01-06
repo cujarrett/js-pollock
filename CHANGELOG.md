@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.8](https://github.com/cujarrett/js-pollock/compare/v0.9.7...v0.9.8) (2022-01-06)
+
+
+### Bug Fixes
+
+* **deps:** bump prop-types from 15.8.0 to 15.8.1 ([#66](https://github.com/cujarrett/js-pollock/issues/66)) ([31667e0](https://github.com/cujarrett/js-pollock/commit/31667e0e81708dc890b2063abb27df2b0fef42ce))
+
 ## [0.9.7](https://github.com/cujarrett/js-pollock/compare/v0.9.6...v0.9.7) (2021-12-31)
 
 
