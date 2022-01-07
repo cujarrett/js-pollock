@@ -49,7 +49,7 @@
     "seed-random": "~2.2.0",
     "simplex-noise": "~3.0.0",
     "smoothstep": "~1.0.1",
-    "web-vitals": "~2.1.2"
+    "web-vitals": "~2.1.3"
   },
   "devDependencies": {
     "@babel/core": "~7.16.7",
