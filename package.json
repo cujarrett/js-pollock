@@ -47,7 +47,7 @@
     "react-scripts": "~5.0.0",
     "react-transition-group": "~4.4.2",
     "seed-random": "~2.2.0",
-    "simplex-noise": "~3.0.0",
+    "simplex-noise": "~3.0.1",
     "smoothstep": "~1.0.1",
     "web-vitals": "~2.1.3"
   },
