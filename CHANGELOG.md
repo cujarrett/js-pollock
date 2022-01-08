@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.9](https://github.com/cujarrett/js-pollock/compare/v0.9.8...v0.9.9) (2022-01-08)
+
+
+### Bug Fixes
+
+* **deps:** bump web-vitals from 2.1.2 to 2.1.3 ([#67](https://github.com/cujarrett/js-pollock/issues/67)) ([9c8db53](https://github.com/cujarrett/js-pollock/commit/9c8db530586a83c9884f1c880f9db5967e08158c))
+
 ## [0.9.8](https://github.com/cujarrett/js-pollock/compare/v0.9.7...v0.9.8) (2022-01-06)
 
 
