@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# [0.10.0](https://github.com/cujarrett/js-pollock/compare/v0.9.12...v0.10.0) (2022-01-21)
+
+
+### Features
+
+* adds dependabot terraform support ([#73](https://github.com/cujarrett/js-pollock/issues/73)) ([640373c](https://github.com/cujarrett/js-pollock/commit/640373cb403a9ec2eeda9b6da29a2d3f820dd228))
+
 ## [0.9.12](https://github.com/cujarrett/js-pollock/compare/v0.9.11...v0.9.12) (2022-01-18)
 
 
