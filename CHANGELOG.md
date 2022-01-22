@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.11.1](https://github.com/cujarrett/js-pollock/compare/v0.11.0...v0.11.1) (2022-01-22)
+
+
+### Bug Fixes
+
+* **deps-dev:** bump @babel/core from 7.16.10 to 7.16.12 ([#76](https://github.com/cujarrett/js-pollock/issues/76)) ([a1c00cd](https://github.com/cujarrett/js-pollock/commit/a1c00cd7e6a344811a3672e5111e5367da0d57de))
+
 # [0.11.0](https://github.com/cujarrett/js-pollock/compare/v0.10.3...v0.11.0) (2022-01-22)
 
 
