@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.11.3](https://github.com/cujarrett/js-pollock/compare/v0.11.2...v0.11.3) (2022-03-04)
+
+
+### Bug Fixes
+
+* **deps-dev:** bump eslint-plugin-react from 7.29.2 to 7.29.3 ([#83](https://github.com/cujarrett/js-pollock/issues/83)) ([3b0aa0e](https://github.com/cujarrett/js-pollock/commit/3b0aa0eae8470c0c8f2e31837e57c0d6f8272f1a))
+
 ## [0.11.2](https://github.com/cujarrett/js-pollock/compare/v0.11.1...v0.11.2) (2022-03-04)
 
 
