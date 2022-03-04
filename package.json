@@ -52,21 +52,21 @@
     "web-vitals": "~2.1.4"
   },
   "devDependencies": {
-    "@babel/core": "~7.16.12",
-    "@babel/eslint-parser": "~7.16.5",
+    "@babel/core": "~7.17.5",
+    "@babel/eslint-parser": "~7.17.0",
     "@babel/preset-react": "~7.16.7",
-    "@commitlint/cli": "~16.1.0",
-    "@commitlint/config-conventional": "~16.0.0",
+    "@commitlint/cli": "~16.2.1",
+    "@commitlint/config-conventional": "~16.2.1",
     "@semantic-release/changelog": "~6.0.1",
     "@semantic-release/commit-analyzer": "~9.0.2",
     "@semantic-release/exec": "~6.0.3",
     "@semantic-release/git": "~10.0.1",
     "@semantic-release/github": "~8.0.2",
-    "@semantic-release/npm": "~9.0.0",
+    "@semantic-release/npm": "~9.0.1",
     "@semantic-release/release-notes-generator": "~10.0.3",
     "commitizen": "~4.2.4",
     "cz-conventional-changelog": "~3.3.0",
-    "eslint-plugin-react": "~7.28.0",
+    "eslint-plugin-react": "~7.29.2",
     "husky": "~7.0.4"
   },
   "husky": {
