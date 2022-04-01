@@ -52,7 +52,7 @@
     "web-vitals": "~2.1.4"
   },
   "devDependencies": {
-    "@babel/core": "~7.17.5",
+    "@babel/core": "~7.17.8",
     "@babel/eslint-parser": "~7.17.0",
     "@babel/preset-react": "~7.16.7",
     "@commitlint/cli": "~16.2.1",
