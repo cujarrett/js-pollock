@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# [0.12.0](https://github.com/cujarrett/js-pollock/compare/v0.11.3...v0.12.0) (2022-04-20)
+
+
+### Features
+
+* adds random pallets ([#90](https://github.com/cujarrett/js-pollock/issues/90)) ([30f5786](https://github.com/cujarrett/js-pollock/commit/30f578677050883d25d86fa0b3821f597982d6f3))
+
 ## [0.11.3](https://github.com/cujarrett/js-pollock/compare/v0.11.2...v0.11.3) (2022-03-04)
 
 
