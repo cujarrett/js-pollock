@@ -9,11 +9,18 @@ import PropTypes from "prop-types"
 import Art from "./lib/"
 
 import defaultMap from "./maps/1.jpg"
-import palettes from "./palettes"
 
 import "./app.css"
 
 const App = () => {
+  const getRandomPalette = () => {
+    const palette = []
+    for (let index = 0; index < 6; index += 1) {
+      palette.push(`#${(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, "0")}`)
+    }
+    return palette
+  }
+
   const getInitialPallete = () => {
     const isUrlColors = window.location.pathname.substring(1) !== ""
     if (isUrlColors) {
@@ -21,14 +28,14 @@ const App = () => {
       const userDefinedColorsWithHex = userDefinedColors.map((color) => `#${color}`)
       return userDefinedColorsWithHex
     } else {
-      return palettes[Math.floor(Math.random() * palettes.length)]
+      return getRandomPalette()
     }
   }
 
   const art = useRef()
   const [map] = useState(defaultMap)
   const [palette, setPalette] = useState(getInitialPallete)
-  const [uiColor, setUiColor] = useState(invert(palette[0]))
+  const [uiColor, setUiColor] = useState(palette[0])
   const [showUi, setShowUi] = useState(true)
 
   useEffect(() => {
@@ -48,9 +55,8 @@ const App = () => {
     }
   }, [showUi])
 
-  const getRandomPalette = () => {
-    const randomPaletteIndex = Math.floor(Math.random() * palettes.length)
-    const palette = palettes[randomPaletteIndex]
+  const updatePalette = () => {
+    const palette = getRandomPalette()
     setPalette(palette)
     setUiColor(invert(palette[0]))
   }
@@ -88,7 +94,7 @@ const App = () => {
             <div className="actions">
               <IconButton
                 style={{ color: uiColor, backgroundColor: invert(uiColor) }}
-                onClick={getRandomPalette}
+                onClick={updatePalette}
                 color="inherit"
                 aria-label="Shuffle"
                 component="span"
