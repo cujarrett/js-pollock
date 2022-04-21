@@ -58,7 +58,7 @@ const App = () => {
   const updatePalette = () => {
     const palette = getRandomPalette()
     setPalette(palette)
-    setUiColor(invert(palette[0]))
+    setUiColor(palette[0])
   }
 
   const drawArt = () => {
@@ -93,7 +93,7 @@ const App = () => {
           <div className="menu">
             <div className="actions">
               <IconButton
-                style={{ color: uiColor, backgroundColor: invert(uiColor) }}
+                style={{ color: invert(uiColor), backgroundColor: uiColor }}
                 onClick={updatePalette}
                 color="inherit"
                 aria-label="Shuffle"
@@ -102,7 +102,7 @@ const App = () => {
                 <Shuffle />
               </IconButton>
               <IconButton
-                style={{ color: uiColor, backgroundColor: invert(uiColor) }}
+                style={{ color: invert(uiColor), backgroundColor: uiColor }}
                 onClick={downloadArt}
                 color="inherit"
                 aria-label="Download Image"
@@ -111,7 +111,7 @@ const App = () => {
                 <GetApp />
               </IconButton>
               <IconButton
-                style={{ color: uiColor, backgroundColor: invert(uiColor) }}
+                style={{ color: invert(uiColor), backgroundColor: uiColor }}
                 onClick={toggleShowUi}
                 color="inherit"
                 aria-label="Hide UI"
@@ -124,9 +124,9 @@ const App = () => {
         }
         { showUi &&
           <div className="footer">
-            <h4 style={{ color: uiColor, backgroundColor: invert(uiColor) }}>
+            <h4 style={{ color: invert(uiColor), backgroundColor: uiColor }}>
               Made by{" "}
-              <a style={{ color: uiColor, backgroundColor: invert(uiColor) }} href="https://cujarrett.dev">
+              <a style={{ color: invert(uiColor), backgroundColor: uiColor }} href="https://cujarrett.dev">
                 @cujarrett
               </a>{" "}
               with <i className="fa fa-heart" /> and JavaScript
