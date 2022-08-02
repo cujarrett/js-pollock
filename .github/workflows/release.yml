@@ -33,7 +33,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - uses: actions/setup-node@v2
-      - run: npm set-script prepare "" && npm install --force --only=production
+      - run: npm set-script prepare "" && npm install --force
       - run: npm run build
       - env:
           AWS_EC2_METADATA_DISABLED: true
