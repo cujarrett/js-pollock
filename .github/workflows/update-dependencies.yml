@@ -23,7 +23,7 @@ jobs:
     - name: Update dependencies
       run: |
         npx npm-check-updates -u
-        npm install
+        npm install --force
     - name: Create pull request
       id: cpr
       uses: peter-evans/create-pull-request@v3
