@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef } from "react"
 import { saveAs } from "file-saver"
 import Animated from "react-animated-transitions"
 import IconButton from "@material-ui/core/IconButton"
-import invert from "invert-color"
 import { GetApp, Shuffle, VisibilityOff } from "@material-ui/icons"
 import PropTypes from "prop-types"
+import palettes from "./palettes"
 
 import Art from "./lib/"
 
@@ -13,29 +13,15 @@ import defaultMap from "./maps/1.jpg"
 import "./app.css"
 
 const App = () => {
-  const getRandomPalette = () => {
-    const palette = []
-    for (let index = 0; index < 6; index += 1) {
-      palette.push(`#${(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, "0")}`)
-    }
-    return palette
-  }
-
   const getInitialPallete = () => {
-    const isUrlColors = window.location.pathname.substring(1) !== ""
-    if (isUrlColors) {
-      const userDefinedColors = window.location.pathname.substring(1).split("-")
-      const userDefinedColorsWithHex = userDefinedColors.map((color) => `#${color}`)
-      return userDefinedColorsWithHex
-    } else {
-      return getRandomPalette()
-    }
+    return palettes[Math.floor(Math.random() * palettes.length)]
   }
 
   const art = useRef()
   const [map] = useState(defaultMap)
   const [palette, setPalette] = useState(getInitialPallete)
   const [uiColor, setUiColor] = useState(palette[0])
+  const [uiBackgroundColor, setUiBackgroundColor] = useState(palette[1])
   const [showUi, setShowUi] = useState(true)
 
   useEffect(() => {
@@ -55,16 +41,15 @@ const App = () => {
     }
   }, [showUi])
 
-  const updatePalette = () => {
-    const palette = getRandomPalette()
+  const getRandomPalette = () => {
+    const randomPaletteIndex = Math.floor(Math.random() * palettes.length)
+    const palette = palettes[randomPaletteIndex]
     setPalette(palette)
     setUiColor(palette[0])
+    setUiBackgroundColor(palette[1])
   }
 
   const drawArt = () => {
-    const paletteWithoutHash = palette.map((color) => color.toUpperCase().replace("#", ""))
-    const stringOfPalettes = paletteWithoutHash.join("-")
-    window.history.pushState("", "jspollock", `/${stringOfPalettes}`)
     art.current.draw()
   }
 
@@ -93,8 +78,8 @@ const App = () => {
           <div className="menu">
             <div className="actions">
               <IconButton
-                style={{ color: invert(uiColor), backgroundColor: uiColor }}
-                onClick={updatePalette}
+                style={{ color: uiBackgroundColor, backgroundColor: uiColor }}
+                onClick={getRandomPalette}
                 color="inherit"
                 aria-label="Shuffle"
                 component="span"
@@ -102,7 +87,7 @@ const App = () => {
                 <Shuffle />
               </IconButton>
               <IconButton
-                style={{ color: invert(uiColor), backgroundColor: uiColor }}
+                style={{ color: uiBackgroundColor, backgroundColor: uiColor }}
                 onClick={downloadArt}
                 color="inherit"
                 aria-label="Download Image"
@@ -111,7 +96,7 @@ const App = () => {
                 <GetApp />
               </IconButton>
               <IconButton
-                style={{ color: invert(uiColor), backgroundColor: uiColor }}
+                style={{ color: uiBackgroundColor, backgroundColor: uiColor }}
                 onClick={toggleShowUi}
                 color="inherit"
                 aria-label="Hide UI"
@@ -124,9 +109,9 @@ const App = () => {
         }
         { showUi &&
           <div className="footer">
-            <h4 style={{ color: invert(uiColor), backgroundColor: uiColor }}>
+            <h4 style={{ color: uiBackgroundColor, backgroundColor: uiColor }}>
               Made by{" "}
-              <a style={{ color: invert(uiColor), backgroundColor: uiColor }} href="https://cujarrett.dev">
+              <a style={{ color: uiBackgroundColor, backgroundColor: uiColor }} href="https://cujarrett.dev">
                 @cujarrett
               </a>{" "}
               with <i className="fa fa-heart" /> and JavaScript
