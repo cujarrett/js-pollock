@@ -12,16 +12,31 @@ import defaultMap from "./maps/1.jpg"
 
 import "./app.css"
 
+const numberOfColorOptions = [5, 10, 30, 100]
+
 const App = () => {
   const getInitialPallete = () => {
-    return palettes[Math.floor(Math.random() * palettes.length)]
+    const newPalette = []
+    const randomNumberOfColorsIndex = Math.floor(Math.random() * numberOfColorOptions.length)
+    const maxNumberOfColors = numberOfColorOptions[randomNumberOfColorsIndex]
+    const numberOfColors = Math.floor(Math.random(maxNumberOfColors) + maxNumberOfColors)
+
+    for (let index = 0; index < numberOfColors; index++) {
+      const colorIndex = Math.floor(Math.random() * Object.keys(palettes).length)
+      const color = Object.keys(palettes)[colorIndex]
+      const shadeIndex = Math.floor(Math.random() * Object.keys(palettes[color]).length)
+      const shade = Object.keys(palettes[color])[shadeIndex]
+      const pick = palettes[color][shade]
+      newPalette.push(pick)
+    }
+    return newPalette
   }
 
   const art = useRef()
   const [map] = useState(defaultMap)
   const [palette, setPalette] = useState(getInitialPallete)
+  const uiBackgroundColor = "#000000"
   const [uiColor, setUiColor] = useState(palette[0])
-  const [uiBackgroundColor, setUiBackgroundColor] = useState(palette[1])
   const [showUi, setShowUi] = useState(true)
 
   useEffect(() => {
@@ -42,11 +57,22 @@ const App = () => {
   }, [showUi])
 
   const getRandomPalette = () => {
-    const randomPaletteIndex = Math.floor(Math.random() * palettes.length)
-    const palette = palettes[randomPaletteIndex]
-    setPalette(palette)
-    setUiColor(palette[0])
-    setUiBackgroundColor(palette[1])
+    const newPalette = []
+    const randomNumberOfColorsIndex = Math.floor(Math.random() * numberOfColorOptions.length)
+    const maxNumberOfColors = numberOfColorOptions[randomNumberOfColorsIndex]
+    const numberOfColors = Math.floor(Math.random(maxNumberOfColors) + maxNumberOfColors)
+
+    for (let index = 0; index < numberOfColors; index++) {
+      const colorIndex = Math.floor(Math.random() * Object.keys(palettes).length)
+      const color = Object.keys(palettes)[colorIndex]
+      const shadeIndex = Math.floor(Math.random() * Object.keys(palettes[color]).length)
+      const shade = Object.keys(palettes[color])[shadeIndex]
+      const pick = palettes[color][shade]
+      newPalette.push(pick)
+    }
+
+    setPalette(newPalette)
+    setUiColor(newPalette[0])
   }
 
   const drawArt = () => {
