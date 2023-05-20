@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react"
 import { saveAs } from "file-saver"
 import Animated from "react-animated-transitions"
-import IconButton from "@material-ui/core/IconButton"
-import { GetApp, Shuffle, VisibilityOff } from "@material-ui/icons"
+import IconButton from "@mui/material/IconButton"
+import { GetApp, Shuffle, VisibilityOff } from "@mui/icons-material"
 import PropTypes from "prop-types"
 import palettes from "./palettes"
 
@@ -12,17 +12,36 @@ import defaultMap from "./maps/1.jpg"
 
 import "./app.css"
 
+const numberOfColorOptions = [5, 10, 30, 100]
+
 const App = () => {
   const getInitialPallete = () => {
-    return palettes[Math.floor(Math.random() * palettes.length)]
+    const newPalette = []
+    const randomNumberOfColorsIndex = Math.floor(Math.random() * numberOfColorOptions.length)
+    const maxNumberOfColors = numberOfColorOptions[randomNumberOfColorsIndex]
+    const numberOfColors = Math.floor(Math.random(maxNumberOfColors) + maxNumberOfColors)
+
+    for (let index = 0; index < numberOfColors; index++) {
+      const colorIndex = Math.floor(Math.random() * Object.keys(palettes).length)
+      const color = Object.keys(palettes)[colorIndex]
+      const shadeIndex = Math.floor(Math.random() * Object.keys(palettes[color]).length)
+      const shade = Object.keys(palettes[color])[shadeIndex]
+      const pick = palettes[color][shade]
+      newPalette.push(pick)
+    }
+    return newPalette
   }
 
   const art = useRef()
   const [map] = useState(defaultMap)
   const [palette, setPalette] = useState(getInitialPallete)
+  const uiBackgroundColor = "#000000"
   const [uiColor, setUiColor] = useState(palette[0])
-  const [uiBackgroundColor, setUiBackgroundColor] = useState(palette[1])
   const [showUi, setShowUi] = useState(true)
+
+  const toggleShowUi = () => {
+    setShowUi(!showUi)
+  }
 
   useEffect(() => {
     drawArt()
@@ -39,14 +58,26 @@ const App = () => {
     return () => {
       document.removeEventListener("mousedown", handleClick)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showUi])
 
   const getRandomPalette = () => {
-    const randomPaletteIndex = Math.floor(Math.random() * palettes.length)
-    const palette = palettes[randomPaletteIndex]
-    setPalette(palette)
-    setUiColor(palette[0])
-    setUiBackgroundColor(palette[1])
+    const newPalette = []
+    const randomNumberOfColorsIndex = Math.floor(Math.random() * numberOfColorOptions.length)
+    const maxNumberOfColors = numberOfColorOptions[randomNumberOfColorsIndex]
+    const numberOfColors = Math.floor(Math.random(maxNumberOfColors) + maxNumberOfColors)
+
+    for (let index = 0; index < numberOfColors; index++) {
+      const colorIndex = Math.floor(Math.random() * Object.keys(palettes).length)
+      const color = Object.keys(palettes)[colorIndex]
+      const shadeIndex = Math.floor(Math.random() * Object.keys(palettes[color]).length)
+      const shade = Object.keys(palettes[color])[shadeIndex]
+      const pick = palettes[color][shade]
+      newPalette.push(pick)
+    }
+
+    setPalette(newPalette)
+    setUiColor(newPalette[0])
   }
 
   const drawArt = () => {
@@ -62,10 +93,6 @@ const App = () => {
     art.current
       .ref()
       .toBlob((blob) => saveAs(blob, `${art.current.metadata().seed}.png`))
-  }
-
-  const toggleShowUi = () => {
-    setShowUi(!showUi)
   }
 
   return (
