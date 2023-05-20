@@ -26,7 +26,7 @@ export default class Art extends Component {
 
     this.loop = createLoop()
 
-    const context = this.canvas.getContext("2d")
+    const context = this.canvas.getContext("2d", { willReadFrequently: true })
     const background = new window.Image()
 
     const opts = Object.assign(

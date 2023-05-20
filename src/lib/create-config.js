@@ -20,13 +20,13 @@ export default ({
     endlessBrowser: true, // whether to endlessly step in browser
     globalAlpha: 0.5,
     interval: 0,
-    lineStyle: random(1) > 0.5 ? "round" : "square",
-    maxRadius: random(30, 40),
+    lineStyle: "round", // "round" or "square"
+    maxRadius: random(25, 50),
     noiseScalar: [random(0.000001, 0.000001), random(0.0002, 0.004)],
     pointilism: random(0, 0.1),
     random: randomFunc,
     seedName: seed,
-    startArea: random(0.0, 1.5),
+    startArea: 0,
     steps: Math.floor(random(100, 1000)),
 
     // background image that drives the algorithm
