@@ -11,7 +11,7 @@ import defaultMap from "./maps/1.jpg"
 
 import "./app.css"
 
-const numberOfColorOptions = [5, 10, 30, 100]
+const numberOfColorOptions = [5, 10, 30]
 
 const App = () => {
   const getInitialPallete = () => {
