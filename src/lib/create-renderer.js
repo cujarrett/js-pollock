@@ -1,7 +1,7 @@
 import clamp from "clamp"
 import lerp from "lerp"
 import newArray from "new-array"
-import SimplexNoise from "simplex-noise"
+import { createNoise3D } from "simplex-noise"
 import vec2 from "gl-vec2"
 
 import createPixels from "./create-pixels.js"
@@ -12,7 +12,7 @@ export default (opt = {}) => {
   const randFunc = opt.random || Math.random
   const random = createRange(randFunc)
 
-  const simplex = new SimplexNoise(randFunc)
+  const noise3D = createNoise3D()
   const ctx = opt.context
   const dpr = typeof opt.pixelRatio === "number" ? opt.pixelRatio : 1
   const { canvas } = ctx
@@ -78,7 +78,7 @@ export default (opt = {}) => {
       const heightValue = heightMap[heightIndex * 4] / 255
 
       const pS = lerp(noiseScalar[0], noiseScalar[1], heightValue)
-      const noise = simplex.noise3D(fx * pS, fy * pS, particle.duration + time)
+      const noise = noise3D(fx * pS, fy * pS, particle.duration + time)
 
       const angle = noise * Math.PI * 2
       const speed = particle.speed + lerp(0.0, 2, 1 - heightValue)
@@ -92,7 +92,7 @@ export default (opt = {}) => {
 
       const s2 = pointilism
 
-      let random = particle.radius * simplex.noise3D(x * s2, y * s2, particle.duration + time)
+      let random = particle.radius * noise3D(x * s2, y * s2, particle.duration + time)
       random *= lerp(0.01, 1.0, heightValue)
 
       ctx.beginPath()
