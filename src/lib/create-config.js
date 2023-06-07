@@ -26,7 +26,7 @@ export default ({
     pointilism: random(0, 0.1),
     random: randomFunc,
     seedName: seed,
-    startArea: 0,
+    startArea: random(.5, 1.5),
     steps: Math.floor(random(100, 1000)),
 
     // background image that drives the algorithm

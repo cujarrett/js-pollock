@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react"
 import { saveAs } from "file-saver"
-import Animated from "react-animated-transitions"
 import IconButton from "@mui/material/IconButton"
 import { GetApp, Shuffle, VisibilityOff } from "@mui/icons-material"
 import PropTypes from "prop-types"
@@ -12,7 +11,7 @@ import defaultMap from "./maps/1.jpg"
 
 import "./app.css"
 
-const numberOfColorOptions = [5, 10, 30, 100]
+const numberOfColorOptions = [5, 10, 30]
 
 const App = () => {
   const getInitialPallete = () => {
@@ -96,57 +95,55 @@ const App = () => {
   }
 
   return (
-    <Animated>
-      <div>
-        <div className="art" data-testid="art">
-          <Art map={map} palette={palette} ref={art} />
-        </div>
-        { showUi &&
-          <div className="menu">
-            <div className="actions">
-              <IconButton
-                style={{ color: uiBackgroundColor, backgroundColor: uiColor }}
-                onClick={getRandomPalette}
-                color="inherit"
-                aria-label="Shuffle"
-                component="span"
-              >
-                <Shuffle />
-              </IconButton>
-              <IconButton
-                style={{ color: uiBackgroundColor, backgroundColor: uiColor }}
-                onClick={downloadArt}
-                color="inherit"
-                aria-label="Download Image"
-                component="span"
-              >
-                <GetApp />
-              </IconButton>
-              <IconButton
-                style={{ color: uiBackgroundColor, backgroundColor: uiColor }}
-                onClick={toggleShowUi}
-                color="inherit"
-                aria-label="Hide UI"
-                component="span"
-              >
-                <VisibilityOff />
-              </IconButton>
-            </div>
-          </div>
-        }
-        { showUi &&
-          <div className="footer">
-            <h4 style={{ color: uiBackgroundColor, backgroundColor: uiColor }}>
-              Made by{" "}
-              <a style={{ color: uiBackgroundColor, backgroundColor: uiColor }} href="https://cujarrett.dev">
-                @cujarrett
-              </a>{" "}
-              with <i className="fa fa-heart" /> and JavaScript
-            </h4>
-          </div>
-        }
+    <div>
+      <div className="art" data-testid="art">
+        <Art map={map} palette={palette} ref={art} />
       </div>
-    </Animated>
+      { showUi &&
+        <div className="menu">
+          <div className="actions">
+            <IconButton
+              style={{ color: uiBackgroundColor, backgroundColor: uiColor }}
+              onClick={getRandomPalette}
+              color="inherit"
+              aria-label="Shuffle"
+              component="span"
+            >
+              <Shuffle />
+            </IconButton>
+            <IconButton
+              style={{ color: uiBackgroundColor, backgroundColor: uiColor }}
+              onClick={downloadArt}
+              color="inherit"
+              aria-label="Download Image"
+              component="span"
+            >
+              <GetApp />
+            </IconButton>
+            <IconButton
+              style={{ color: uiBackgroundColor, backgroundColor: uiColor }}
+              onClick={toggleShowUi}
+              color="inherit"
+              aria-label="Hide UI"
+              component="span"
+            >
+              <VisibilityOff />
+            </IconButton>
+          </div>
+        </div>
+      }
+      { showUi &&
+        <div className="footer">
+          <h4 style={{ color: uiBackgroundColor, backgroundColor: uiColor }}>
+            Made by{" "}
+            <a style={{ color: uiBackgroundColor, backgroundColor: uiColor }} href="https://cujarrett.dev">
+              @cujarrett
+            </a>{" "}
+            with <i className="fa fa-heart" /> and JavaScript
+          </h4>
+        </div>
+      }
+    </div>
   )
 }
 
