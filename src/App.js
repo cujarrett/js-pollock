@@ -136,7 +136,7 @@ const App = () => {
         <div className="footer">
           <h4 style={{ color: uiBackgroundColor, backgroundColor: uiColor }}>
             Made by{" "}
-            <a style={{ color: uiBackgroundColor, backgroundColor: uiColor }} href="https://cujarrett.dev">
+            <a style={{ color: uiBackgroundColor, backgroundColor: uiColor }} href="https://mattjarrett.dev">
               @cujarrett
             </a>{" "}
             with <i className="fa fa-heart" /> and JavaScript
