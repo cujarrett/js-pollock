@@ -1,0 +1,102 @@
+.menu {
+  position: absolute;
+  width: 226px;
+  height: 60px;
+  bottom: 10%;
+  left: 50%;
+  margin-left: -113px;
+}
+
+.footer h4 {
+  text-align: center;
+  position: absolute;
+  width: 364px;
+  left: 50%;
+  bottom: 2%;
+  margin-left: -182px;
+  margin-bottom: 0;
+  padding: 10px 0;
+  border-radius: 25px;
+}
+
+.footer h4 a {
+  text-decoration: none;
+}
+
+.actions {
+  left: 10px;
+  position: absolute;
+  top: 10px;
+}
+
+.actions button {
+  margin: 12px;
+}
+
+.art {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
+.story-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.story-card {
+  position: relative;
+  max-width: 420px;
+  width: 90%;
+  background: rgba(20, 20, 20, 0.72);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+  padding: 40px 36px 32px;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  text-align: center;
+}
+
+.story-close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.story-close:hover {
+  color: #ffffff;
+}
+
+.story-text {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin: 0 0 12px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.story-question {
+  font-size: 1.35rem;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.5;
+  margin: 16px 0;
+  color: #ffffff;
+}

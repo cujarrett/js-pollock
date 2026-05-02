@@ -1,17 +1,18 @@
-// fits the PIXI.Sprite to the parent
-// similar to css background-size: cover
-
-export default (ctx, image, parent, scale = 1) => {
+export default (
+  ctx: CanvasRenderingContext2D,
+  image: HTMLImageElement,
+  parent?: HTMLCanvasElement | null,
+  scale = 1,
+): void => {
   const pixi = parent || ctx.canvas
 
   const tAspect = image.width / image.height
   const pixiWidth = pixi.width
   const pixiHeight = pixi.height
-
   const pAspect = pixiWidth / pixiHeight
 
-  let width
-  let height
+  let width: number
+  let height: number
 
   if (tAspect > pAspect) {
     height = pixiHeight
@@ -24,9 +25,7 @@ export default (ctx, image, parent, scale = 1) => {
   width *= scale
   height *= scale
 
-  // eslint-disable-next-line id-length
   const x = (pixiWidth - width) / 2
-  // eslint-disable-next-line id-length
   const y = (pixiHeight - height) / 2
 
   ctx.drawImage(image, x, y, width, height)

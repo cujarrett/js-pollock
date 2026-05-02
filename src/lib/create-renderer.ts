@@ -2,14 +2,30 @@ import clamp from "clamp"
 import lerp from "lerp"
 import newArray from "new-array"
 import { createNoise3D } from "simplex-noise"
-import vec2 from "gl-vec2"
+import * as vec2 from "gl-vec2"
 
-import createPixels from "./create-pixels.js"
-import createRange from "./create-range.js"
-import createSphere from "./create-sphere.js"
+import createPixels from "./create-pixels"
+import createRange from "./create-range"
+import createSphere from "./create-sphere"
+import { ArtConfig } from "./create-config"
 
-export default (opt = {}) => {
-  const randFunc = opt.random || Math.random
+interface RendererOptions extends Partial<ArtConfig> {
+  context: CanvasRenderingContext2D
+  backgroundImage: HTMLImageElement
+}
+
+interface Particle {
+  position: number[]
+  radius: number
+  duration: number
+  time: number
+  velocity: number[]
+  speed: number
+  color: string
+}
+
+export default (opt: RendererOptions) => {
+  const randFunc = opt.random ?? Math.random
   const random = createRange(randFunc)
 
   const noise3D = createNoise3D()
@@ -17,58 +33,53 @@ export default (opt = {}) => {
   const dpr = typeof opt.pixelRatio === "number" ? opt.pixelRatio : 1
   const { canvas } = ctx
   const { width, height } = canvas
-  const count = opt.count || 0
-  const palette = opt.palette || ["#fff", "#000"]
+  const count = opt.count ?? 0
+  const palette = opt.palette ?? ["#fff", "#000"]
   const { backgroundImage } = opt
 
   const maxRadius = typeof opt.maxRadius === "number" ? opt.maxRadius : 10
   const startArea = typeof opt.startArea === "number" ? opt.startArea : 0.5
-  const pointilism = lerp(0.000001, 0.5, opt.pointilism)
-  const noiseScalar = opt.noiseScalar || [0.00001, 0.0001]
+  const pointilism = lerp(0.000001, 0.5, opt.pointilism ?? 0)
+  const noiseScalar = opt.noiseScalar ?? [0.00001, 0.0001]
   const globalAlpha = typeof opt.globalAlpha === "number" ? opt.globalAlpha : 1
 
   const heightMapImage = createPixels(ctx, backgroundImage, {
     scale: opt.backgroundScale,
-    fillStyle: opt.backgroundFill
+    fillStyle: opt.backgroundFill,
   })
 
   const heightMap = heightMapImage.data
   let time = 0
 
-  const resetParticle = (particle = {}) => {
+  const resetParticle = (particle: Partial<Particle> = {}): Particle => {
     const scale = Math.min(width, height) / 2
+    const p = particle as Particle
 
-    particle.position = createSphere([], random(0, scale * startArea), randFunc)
-    particle.position[0] += width / 2
-    particle.position[1] += height / 2
-    particle.radius = random(0.01, maxRadius)
-    particle.duration = random(1, 500)
-    particle.time = random(0, particle.duration)
-    particle.velocity = [random(-1, 1), random(-1, 1)]
-    particle.speed = random(0.5, 2) * dpr
+    p.position = createSphere([], random(0, scale * startArea), randFunc)
+    p.position[0] += width / 2
+    p.position[1] += height / 2
+    p.radius = random(0.01, maxRadius)
+    p.duration = random(1, 500)
+    p.time = random(0, p.duration)
+    p.velocity = [random(-1, 1), random(-1, 1)]
+    p.speed = random(0.5, 2) * dpr
+    p.color = palette[Math.floor(random(palette.length))]
 
-    // we actually include the background color here
-    // this means some strokes may seem to "erase" the other
-    // colors, which can add a nice effect
-    particle.color = palette[Math.floor(random(palette.length))]
-
-    return particle
+    return p
   }
 
-  const particles = newArray(count).map(() => resetParticle())
+  const particles: Particle[] = newArray(count).map(() => resetParticle())
 
   const clear = () => {
     ctx.fillStyle = palette[0]
     ctx.fillRect(0, 0, canvas.width, canvas.height)
   }
 
-  const step = (dt) => {
+  const step = (dt: number) => {
     time += dt
 
     particles.forEach((particle) => {
-      // eslint-disable-next-line id-length
       const x = particle.position[0]
-      // eslint-disable-next-line id-length
       const y = particle.position[1]
 
       const fx = clamp(Math.round(x), 0, canvas.width - 1)
@@ -87,34 +98,33 @@ export default (opt = {}) => {
       vec2.normalize(particle.velocity, particle.velocity)
 
       const move = vec2.scale([], particle.velocity, speed)
-
       vec2.add(particle.position, particle.position, move)
 
       const s2 = pointilism
-
-      let random = particle.radius * noise3D(x * s2, y * s2, particle.duration + time)
-      random *= lerp(0.01, 1.0, heightValue)
+      let radius = particle.radius * noise3D(x * s2, y * s2, particle.duration + time)
+      radius *= lerp(0.01, 1.0, heightValue)
 
       ctx.beginPath()
       ctx.lineTo(x, y)
       ctx.lineTo(particle.position[0], particle.position[1])
-      ctx.lineWidth = random * (particle.time / particle.duration)
-      ctx.lineCap = opt.lineStyle || "square"
-      ctx.lineJoin = opt.lineStyle || "square"
+      ctx.lineWidth = radius * (particle.time / particle.duration)
+      ctx.lineCap = (opt.lineStyle ?? "round") as CanvasLineCap
+      ctx.lineJoin = opt.lineStyle === "round" ? "round" : "miter"
       ctx.strokeStyle = particle.color
-
       ctx.globalAlpha = globalAlpha
       ctx.stroke()
 
       particle.time += dt
 
-      if (particle.time > particle.duration) resetParticle(particle)
+      if (particle.time > particle.duration) {
+        resetParticle(particle)
+      }
     })
   }
 
-  return {
-    clear,
-    step,
-    debugLuma: ctx.putImageData(heightMapImage, 0, 0)
+  const debugLuma = () => {
+    ctx.putImageData(heightMapImage, 0, 0)
   }
+
+  return { clear, step, debugLuma }
 }

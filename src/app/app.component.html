@@ -1,0 +1,72 @@
+<div class="art" data-testid="art" (mousedown)="showUi() === false && toggleUi()">
+  <app-art [map]="map" [palette]="palette()"></app-art>
+</div>
+
+@if (showUi()) {
+  <div class="menu">
+    <div class="actions">
+      <button
+        mat-icon-button
+        [style.color]="uiBackgroundColor"
+        [style.background-color]="uiColor()"
+        (click)="shuffle()"
+        aria-label="Shuffle palette"
+      >
+        <mat-icon>shuffle</mat-icon>
+      </button>
+
+      <button
+        mat-icon-button
+        [style.color]="uiBackgroundColor"
+        [style.background-color]="uiColor()"
+        (click)="toggleStory()"
+        aria-label="About this app"
+        data-testid="story-button"
+      >
+        <mat-icon>question_mark</mat-icon>
+      </button>
+
+      <button
+        mat-icon-button
+        [style.color]="uiBackgroundColor"
+        [style.background-color]="uiColor()"
+        (click)="toggleUi()"
+        aria-label="Hide controls"
+      >
+        <mat-icon>visibility_off</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="footer">
+    <h4 [style.color]="uiBackgroundColor" [style.background-color]="uiColor()">
+      Made by
+      <a
+        [style.color]="uiBackgroundColor"
+        style="text-decoration: underline"
+        href="https://mattjarrett.dev"
+        target="_blank"
+        rel="noopener noreferrer"
+        >Matt Jarrett</a
+      >
+      with &#10084; and Typescript
+    </h4>
+  </div>
+}
+
+@if (showStory()) {
+  <div
+    class="story-backdrop"
+    (click)="toggleStory()"
+    role="dialog"
+    aria-modal="true"
+    aria-label="About this app"
+  >
+    <div class="story-card" (click)="$event.stopPropagation()">
+      <button class="story-close" (click)="toggleStory()" aria-label="Close">&times;</button>
+      <p class="story-text">One Saturday my daughter looked up at me and asked,</p>
+      <p class="story-question">&ldquo;Dad, can computers make art?&rdquo;</p>
+      <p class="story-text">This is what we made together to answer the question.</p>
+    </div>
+  </div>
+}
