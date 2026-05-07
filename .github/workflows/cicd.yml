@@ -111,3 +111,10 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+  deploy:
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    uses: cujarrett/homelab-tenants/.github/workflows/update-image-tag.yml@main
+    secrets:
+      homelab_pat: ${{ secrets.HOMELAB_PAT }}
