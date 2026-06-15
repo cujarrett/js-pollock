@@ -47,7 +47,7 @@
     "simplex-noise": "~4.0.3",
     "smoothstep": "~1.0.1",
     "tslib": "^2.8.1",
-    "zone.js": "~0.16.1"
+    "zone.js": "~0.16.2"
   },
   "devDependencies": {
     "@angular-eslint/builder": "~22.0.0",
