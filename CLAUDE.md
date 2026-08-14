@@ -4,11 +4,11 @@
 
 ### Pre-commit safety check
 
-Before telling the user to commit, always run `/security-review`. It reviews the pending changes on the current branch for security issues. Once it confirms the changes are safe, offer the user a suggested commit message — do not run `git commit` yourself.
+Before telling the user to commit, always run `/security-review`. It reviews the pending changes on the current branch for security issues. Once it confirms the changes are safe, offer the user a suggested commit message - do not run `git commit` yourself.
 
 ## Philosophy: Grug-Brained Development
 
-> "Complexity very, very bad." — [grugbrain.dev](https://grugbrain.dev/)
+> "Complexity very, very bad." - [grugbrain.dev](https://grugbrain.dev/)
 
 - **Say no.** The best weapon against complexity is the word "no". No new feature, no new abstraction, until it earns its place.
 - **No abstraction until a pattern repeats three times.** Let cut points emerge naturally from the code; don't invent them up front.
