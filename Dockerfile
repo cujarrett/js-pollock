@@ -5,9 +5,7 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-FROM nginx:1.31-alpine@sha256:785835ea65db4bba6f021acc0f3be91b0fef76a53fe41f8588c6698d2aed0606
-# The base image lags behind Alpine security fixes.
-# Updating here clears those CVEs without waiting for nginx to rebuild.
-RUN apk upgrade --no-cache
+# The platform base image already carries Alpine's security fixes.
+FROM ghcr.io/cujarrett/base-spa:nginx1.31-alpine@sha256:a5e096d54c04b6543c25e45b26334e3a2f8533b571bf50e0dd02b66fb7c4e84a
 COPY --from=build /app/dist/js-pollock/browser /usr/share/nginx/html
 EXPOSE 80
