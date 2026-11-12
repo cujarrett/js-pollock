@@ -1,3 +1,7 @@
+# js-pollock
+
+An Angular single page app that draws computer-generated art inspired by Jackson Pollock. It is live at `jspollock.mattjarrett.dev` and runs as a `Spa` on the homelab platform, from `js-pollock/js-pollock.yaml` in `homelab-workspaces`.
+
 ## Rules
 
 - **Never run `git commit`, `git push`, or any git command that writes to or modifies repository history or remotes.** If a task requires committing or pushing, stop and tell the user to run the git command manually.
