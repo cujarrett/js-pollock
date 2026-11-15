@@ -7,8 +7,8 @@
     <div class="actions">
       <button
         mat-icon-button
-        [style.color]="uiBackgroundColor"
-        [style.background-color]="uiColor()"
+        [style.color]="uiColor()"
+        [style.background-color]="uiBackgroundColor()"
         (click)="shuffle()"
         aria-label="Shuffle palette"
       >
@@ -17,8 +17,8 @@
 
       <button
         mat-icon-button
-        [style.color]="uiBackgroundColor"
-        [style.background-color]="uiColor()"
+        [style.color]="uiColor()"
+        [style.background-color]="uiBackgroundColor()"
         (click)="toggleStory()"
         aria-label="About this app"
         data-testid="story-button"
@@ -28,8 +28,8 @@
 
       <button
         mat-icon-button
-        [style.color]="uiBackgroundColor"
-        [style.background-color]="uiColor()"
+        [style.color]="uiColor()"
+        [style.background-color]="uiBackgroundColor()"
         (click)="toggleUi()"
         aria-label="Hide controls"
       >
@@ -39,10 +39,10 @@
   </div>
 
   <div class="footer">
-    <h4 [style.color]="uiBackgroundColor" [style.background-color]="uiColor()">
+    <h4 [style.color]="uiColor()" [style.background-color]="uiBackgroundColor()">
       Made by
       <a
-        [style.color]="uiBackgroundColor"
+        [style.color]="uiColor()"
         style="text-decoration: underline"
         href="https://mattjarrett.dev"
         target="_blank"
