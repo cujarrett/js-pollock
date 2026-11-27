@@ -6,6 +6,6 @@ COPY . .
 RUN npm run build
 
 # The platform base image already carries Alpine's security fixes.
-FROM ghcr.io/cujarrett/base-nginx:1.31-alpine@sha256:b7012eeaf6e201aba6a2de70c5b9d8d23a368e5c4ce1534b64240e39b8b81d16
+FROM ghcr.io/cujarrett/base-nginx:1.31-alpine@sha256:8a5df7fb081bbe170c362303c899a10ee94046a6ccb3a55783336ad87fd218e6
 COPY --from=build /app/dist/js-pollock/browser /usr/share/nginx/html
 EXPOSE 80
